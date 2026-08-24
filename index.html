@@ -202,8 +202,9 @@ h2 em,.lede em{font-style:normal;color:var(--brick)}  /* 시트 **강조** 표�
 .prod p{font-size:13.5px;color:var(--ink-soft)}
 .prod .spec{margin-top:auto;padding-top:12px;font-family:var(--font-mono);font-size:11.5px;color:var(--brick)}
 .more-link{margin-top:26px;display:inline-flex;align-items:center;gap:8px;font-weight:700;
-  color:var(--brick);font-size:15px}
-.more-link::after{content:"→"}
+  color:var(--brick);font-size:16px;text-decoration:underline;text-underline-offset:4px;
+  padding:6px 2px}
+.more-link::after{content:"→";font-weight:900}
    /* ---- 제품 라인업 사진 최적화 스타일 ---- */
 .prod {
   padding: 0 !important; /* 내부 여백 제거하여 사진이 꽉 차게 변경 */
@@ -281,6 +282,7 @@ h2 em,.lede em{font-style:normal;color:var(--brick)}  /* 시트 **강조** 표�
 .form-btn span::after{content:"↗";margin-left:8px;font-weight:400}
 footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-align:center;
   font-family:var(--font-mono);letter-spacing:.04em}
+@media (max-width:760px){footer{padding-bottom:100px}}  /* 하단 고정 전화바에 안 가리게 여백 확보 */
 
 /* ---- 사례 팝업(라이트박스) ---- */
 .gitem{cursor:pointer;transition:transform .15s ease}
@@ -642,7 +644,7 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
   </div>
 </section>
 
-<a class="callbar" id="callBar" href="tel:02-2185-2263">전화로 견적 문의 &nbsp;›</a>
+<a class="callbar" id="callBar" href="tel:02-2185-2263">☎ 바로 문의하기</a>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true">
   <button class="lb-x" id="lbX" aria-label="닫기">✕</button>
