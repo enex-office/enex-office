@@ -202,8 +202,9 @@ h2 em,.lede em{font-style:normal;color:var(--brick)}  /* 시트 **강조** 표�
 .prod p{font-size:13.5px;color:var(--ink-soft)}
 .prod .spec{margin-top:auto;padding-top:12px;font-family:var(--font-mono);font-size:11.5px;color:var(--brick)}
 .more-link{margin-top:26px;display:inline-flex;align-items:center;gap:8px;font-weight:700;
-  color:var(--brick);font-size:16px;text-decoration:underline;text-underline-offset:4px;
-  padding:6px 2px}
+  color:var(--white);background:var(--brick);font-size:15px;padding:11px 22px;
+  border-radius:999px;transition:background .15s ease}
+.more-link:hover{background:var(--brick-deep)}
 .more-link::after{content:"→";font-weight:900}
    /* ---- 제품 라인업 사진 최적화 스타일 ---- */
 .prod {
@@ -432,7 +433,7 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
     <h1 data-ck="커버_제목">의자 하나부터<br>사옥 전체까지, <em>에넥스.</em></h1>
     <p class="sub" data-ck="커버_서브">계약부터 납품, A/S까지 — 오피스 가구 토탈 솔루션.<br>견적 문의만으로도 환영입니다.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" id="heroCall" href="tel:02-2185-2263">전화 견적 문의</a>
+      <a class="btn btn-primary" id="heroCall" href="#contact">전화 견적 문의</a>
       <a class="btn btn-ghost" href="#cases">납품 사례 보기</a>
     </div>
   </div>
@@ -865,9 +866,7 @@ function renderContacts(data){
 function renderLinks(data){
   const clean=u=>((u||"").match(/(https?:\/\/\S+|tel:\S+|mailto:\S+)/)||[""])[0]; // 잡텍스트 제거
   const find=n=>{const r=data.find(d=>(d.항목||"").indexOf(n)>-1);return r?clean(r.URL):"";};
-  const quote=find("견적"), as=find("A/S")||find("AS"), tel=find("전화"), cat=find("카탈로그");
-  
-  if(tel && document.getElementById("heroCall")) document.getElementById("heroCall").href=tel;
+  const quote=find("견적"), as=find("A/S")||find("AS"), cat=find("카탈로그");
   
   // 573, 574행의 구글 시트 링크 데이터를 받아 버튼 2개를 화면에 강제로 띄우는 구간
   const formRow = document.getElementById("formRow");
@@ -875,7 +874,7 @@ function renderLinks(data){
     formRow.innerHTML =
       (quote ? `<a class="form-btn" href="${quote}" target="_blank" rel="noopener"><span>가구 견적 의뢰</span></a>` : "") +
       (as ? `<a class="form-btn" href="${as}" target="_blank" rel="noopener"><span>A/S 접수</span></a>` : "") +
-      `<a class="form-btn" href="https://www.enex.co.kr/office/list.php" target="_blank" rel="noopener"><span>에넥스 오피스 홈페이지</span></a>` +
+      `<a class="form-btn" href="https://www.enex.co.kr/office/list.php" target="_blank" rel="noopener"><span>에넥스 오피스 공식 홈페이지</span></a>` +
       (cat ? `<a class="form-btn" href="${cat}" target="_blank" rel="noopener"><span>카탈로그 다운로드</span></a>` : "");
   }
 }
