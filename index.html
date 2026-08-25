@@ -644,7 +644,7 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
   </div>
 </section>
 
-<a class="callbar" id="callBar" href="tel:02-2185-2263">☎ 바로 문의하기</a>
+<a class="callbar" id="callBar" href="#contact">☎ 바로 문의하기</a>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true">
   <button class="lb-x" id="lbX" aria-label="닫기">✕</button>
@@ -868,14 +868,15 @@ function renderLinks(data){
   const quote=find("견적"), as=find("A/S")||find("AS"), tel=find("전화"), cat=find("카탈로그");
   
   if(tel && document.getElementById("heroCall")) document.getElementById("heroCall").href=tel;
-  if(tel && document.getElementById("callBar")) document.getElementById("callBar").href=tel;
   
   // 573, 574행의 구글 시트 링크 데이터를 받아 버튼 2개를 화면에 강제로 띄우는 구간
   const formRow = document.getElementById("formRow");
   if(formRow) {
     formRow.innerHTML =
       (quote ? `<a class="form-btn" href="${quote}" target="_blank" rel="noopener"><span>가구 견적 의뢰</span></a>` : "") +
-      (as ? `<a class="form-btn" href="${as}" target="_blank" rel="noopener"><span>A/S 접수</span></a>` : "");
+      (as ? `<a class="form-btn" href="${as}" target="_blank" rel="noopener"><span>A/S 접수</span></a>` : "") +
+      `<a class="form-btn" href="https://www.enex.co.kr/office/list.php" target="_blank" rel="noopener"><span>에넥스 오피스 홈페이지</span></a>` +
+      (cat ? `<a class="form-btn" href="${cat}" target="_blank" rel="noopener"><span>카탈로그 다운로드</span></a>` : "");
   }
 }
 
