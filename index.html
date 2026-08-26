@@ -155,6 +155,16 @@ h2 em,.lede em{font-style:normal;color:var(--brick)}  /* 시트 **강조** 표�
   border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;font-size:15px}
 
 /* ============================================================
+   S4-2. 자주 겪는 불편 (FAQ)
+   ============================================================ */
+.faq{margin-top:44px;display:grid;gap:0}
+.faq-item{padding:20px 0;border-top:1px solid var(--line)}
+.faq-item:last-child{border-bottom:1px solid var(--line)}
+.faq-item .q{font-size:16.5px;font-weight:800;display:flex;gap:8px;align-items:baseline}
+.faq-item .q b{color:var(--brick);font-family:var(--font-mono);font-size:14px;font-weight:900}
+.faq-item .a{margin-top:6px;font-size:14.5px;color:var(--ink-soft);padding-left:26px}
+
+/* ============================================================
    S5. 납품실적 (익명)
    ============================================================ */
 .record-grid{display:grid;gap:26px 40px;margin-top:44px}
@@ -461,6 +471,7 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
       <div class="stat"><div class="num">170<small>개</small></div><div class="lbl">전국 대리점 네트워크</div></div>
       <div class="stat"><div class="num">ISO<small>인증</small></div><div class="lbl">품질 · 환경 · 안전보건 인증</div></div>
     </div>
+    <div class="process-note"><b>가격을 낮췄다고 품질까지 낮추지 않았습니다.</b> — 국내 유일 전품목 단일공장 직접생산으로 가격과 품질 기준을 함께 지킵니다.</div>
   </div>
 </section>
 
@@ -538,10 +549,31 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
   </div>
 </section>
 
-<!-- ================= S5. 납품실적 ================= -->
-<section id="records">
+<!-- ================= S4-2. 자주 겪는 불편 (FAQ) ================= -->
+<section id="faq">
   <div class="wrap reveal">
-    <div class="eyebrow">05 — TRACK RECORD</div>
+    <div class="eyebrow">05 — WE HANDLE THIS</div>
+    <h2>고르고 나면,<br>그 다음은 저희 일입니다.</h2>
+    <p class="lede">결정만 해주세요. 보고·품의 이후 진행은 저희가 알아서 챙깁니다.</p>
+    <div class="faq">
+      <div class="faq-item"><div class="q"><b>Q</b>비교 견적이 여러 곳 필요하신가요?</div>
+        <div class="a">견적서, 필요하신 만큼 다시 뽑아드립니다. 비교용 문의도 언제든 환영합니다.</div></div>
+      <div class="faq-item"><div class="q"><b>Q</b>실측·도면이 없으신가요?</div>
+        <div class="a">현장 방문 실측부터 저희가 직접 진행합니다.</div></div>
+      <div class="faq-item"><div class="q"><b>Q</b>작업 전후 사진대지·보고서 작성이 번거로우신가요?</div>
+        <div class="a">시공 기록과 사진대지까지 정리해서 전달드립니다.</div></div>
+      <div class="faq-item"><div class="q"><b>Q</b>납품 후 하자, 누구한테 연락할지 막막하신가요?</div>
+        <div class="a">담당자 한 명이 문의부터 A/S까지 끝까지 책임집니다.</div></div>
+      <div class="faq-item"><div class="q"><b>Q</b>예산은 빠듯한데 품질이 걱정되시나요?</div>
+        <div class="a">단일공장 직접생산이라 가격을 낮춰도 품질 기준은 그대로입니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S5. 납품실적 ================= -->
+<section class="alt" id="records">
+  <div class="wrap reveal">
+    <div class="eyebrow">06 — TRACK RECORD</div>
     <h2 data-ck="실적_제목">은행 본점부터 대학 강의실까지,<br>이미 납품해 봤습니다.</h2>
     <p class="lede">기업 사옥, 금융기관, 공항 라운지, 학교와 기숙사, 아파트 커뮤니티 <br>—
       공간의 성격이 달라도 납품과 시공의 기준은 같습니다.</p>
@@ -551,9 +583,9 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
 </section>
 
 <!-- ================= S6. 납품사례 갤러리 ================= -->
-<section class="alt" id="cases">
+<section id="cases">
   <div class="wrap reveal">
-    <div class="eyebrow">06 — GALLERY</div>
+    <div class="eyebrow">07 — GALLERY</div>
     <h2 data-ck="갤러리_제목">말보다 사진이 빠릅니다.</h2>
     <a class="more-link" href="https://www.enex.co.kr/office/list.php" target="_blank" rel="noopener">세부 납품 사례 (ENEX-OFFICE 홈페이지 이동)</a>
     <div class="filters" id="filters"></div>
@@ -563,9 +595,9 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
 </section>
 
 <!-- ================= S7. 제품 하이라이트 ================= -->
-<section id="products">
+<section class="alt" id="products">
   <div class="wrap reveal">
-    <div class="eyebrow">07 — LINE-UP</div>
+    <div class="eyebrow">08 — LINE-UP</div>
     <h2 data-ck="제품_제목">가장 많이 나가는 구성.</h2>
     <div class="prods">
       
@@ -620,9 +652,9 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
 </section>
 
 <!-- ================= S8. 품질·신뢰 ================= -->
-<section class="alt" id="quality">
+<section id="quality">
   <div class="wrap reveal">
-    <div class="eyebrow">08 — CERTIFIED</div>
+    <div class="eyebrow">09 — CERTIFIED</div>
     <h2 data-ck="품질_제목">인증으로 증명합니다.</h2>
     <div class="badges">
       <div class="badge"><div class="code">ISO 9001</div><h3>품질경영시스템</h3><p>1996년 취득 · 한국표준협회</p></div>
@@ -637,7 +669,7 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
 <!-- ================= S9. 문의 ================= -->
 <section class="contact" id="contact">
   <div class="wrap reveal">
-    <div class="eyebrow">09 — CONTACT</div>
+    <div class="eyebrow">10 — CONTACT</div>
     <h2 data-ck="문의_제목">지금, 견적부터 받아보세요.</h2>
     <p class="lede" data-ck="문의_서브">전화 한 통이면 시작됩니다. 실측·시안·견적까지 무료입니다.</p>
     <div class="contact-grid" id="contactGrid"></div>
