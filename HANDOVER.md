@@ -50,6 +50,12 @@
     preview.html의 FALLBACK은 사진 내용 기준으로 임시 재매핑(기숙사·카페테리아는 "PHOTO 준비중"). **시트 `cases` 탭의 사진파일명이 실제 사진과 맞는지 사장님 확인 필요.**
   - `FALLBACK.contacts`에 조인진 차장 없음(이종민·김지민만). 시트에는 있을 것으로 추정 — 이 환경은 docs.google.com 접근이 차단되어(curl·WebFetch 모두 EGRESS_BLOCKED) 시트를 직접 읽을 수 없었음.
   - 이 두 FALLBACK은 시트 로딩 실패 시 노출되는 안전망이므로, 시트 현재값을 받아 index.html·preview.html 양쪽 FALLBACK을 동기화해야 함 (CLAUDE.md 원칙)
+- **2026-09-02 3차 피드백 (v4)**: 거점 지도에 **서울 본사(서초)** 흰 링 마커 추가 + 안성과 묶어 점선 "수도권" 영역 표기.
+  SVG 라벨 좌우정렬은 `text-anchor` 속성이 CSS에 밀리므로 `.tl`/`.tr` 클래스로 처리할 것 (속성으로 쓰면 무시됨)
+- **카탈로그 배너가 시안에 없는 이유**: 시트 `links` 탭 "카탈로그" 행에서 URL을 읽어 렌더하는데(renderLinks의 `find("카탈로그")`),
+  이 환경은 시트 접근이 막혀 FALLBACK.links를 쓰고 거기엔 카탈로그 행이 없음. 조인진 차장 누락도 같은 원인. **코드 문제 아님**
+- **권장 검증 절차**: preview.html을 main에 추가 파일로만 push → `.../preview.html`에서 실제 시트 데이터로 확인 → 그 후 index.html 교체.
+  이 방식이면 검증 단계에서 실사이트가 전혀 안 바뀜
 - **다음 세션 할 일**: (1) 시트 `contacts`·`cases` 탭 현재 행을 사용자에게 받아 FALLBACK 동기화 (2) 문서 §9 나머지 결정 받기 → `preview.html` 반영 → `index.html` 교체 → CLAUDE.md 갱신 → main push
 - 주의: `preview.html`은 시안이므로 main에 올리면 `/preview.html` 주소로 공개됨. 교체 전까지는 브랜치에만 둘 것
 
