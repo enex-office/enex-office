@@ -56,8 +56,19 @@
   이 환경은 시트 접근이 막혀 FALLBACK.links를 쓰고 거기엔 카탈로그 행이 없음. 조인진 차장 누락도 같은 원인. **코드 문제 아님**
 - **권장 검증 절차**: preview.html을 main에 추가 파일로만 push → `.../preview.html`에서 실제 시트 데이터로 확인 → 그 후 index.html 교체.
   이 방식이면 검증 단계에서 실사이트가 전혀 안 바뀜
+- **2026-09-02 4차 피드백 (v5)**:
+  - 지도: 서울 본사 부제 "서초…" → "HEAD OFFICE", 오른쪽 수도권 설명 문단 삭제 (점선 "수도권" 영역은 유지)
+  - A-4: 기숙사·카페테리아 사례는 FALLBACK에서 `노출:"N"` (사진 확보 시 Y로). 실사이트는 시트 `노출` 열이 기준
+  - C(영상/비포애프터): 사용자가 월례회의 PDF(시공완료 사진)를 주며 "시공 전 사진을 AI로 생성해 전/후 슬라이더"를 요청.
+    **이 환경(Claude Code)에는 이미지 생성 기능이 없음** — 모델(Fable/Opus) 전환과 무관. 또한 실제 고객사 현장의 가짜 '시공 전' 사진을
+    진짜처럼 노출하는 건 표시광고 리스크가 있어 우려를 전달함. 대안으로 **완공 사진에서 선만 추출한 스케치 ↔ 완공** 슬라이더를 구현
+    (Chromium canvas Sobel 엣지, 스크립트 `scratchpad/sketch.mjs` 방식). 라벨 SKETCH/COMPLETED, "완공 사진 바탕 제작" 주석 명시
+  - PDF에서 JPEG 26장 추출(순수 파이썬 DCTDecode 스캔; poppler·pypdf 사용 불가). 그중 3장을 `images/ba_{meeting,office,lounge}_after.jpg`로 저장,
+    스케치 버전은 `ba_*_concept.jpg`. 나머지 23장은 미반영(이 세션 scratchpad에만 있음 — 필요하면 PDF에서 다시 추출)
+  - 환경 메모: 이 클라우드 세션은 네트워크 정책상 docs.google.com이 차단됨(로컬 PC 세션과 다름). 환경 설정에서 허용 도메인 추가 가능 —
+    https://code.claude.com/docs/en/claude-code-on-the-web 참고
 - **다음 세션 할 일**: (1) 시트 `contacts`·`cases` 탭 현재 행을 사용자에게 받아 FALLBACK 동기화 (2) 문서 §9 나머지 결정 받기 → `preview.html` 반영 → `index.html` 교체 → CLAUDE.md 갱신 → main push
-- 주의: `preview.html`은 시안이므로 main에 올리면 `/preview.html` 주소로 공개됨. 교체 전까지는 브랜치에만 둘 것
+- 주의: `preview.html`은 시안이므로 main에 올리면 `/preview.html` 주소로 공개됨. (사용자 승인 시 검증용으로 올리는 건 권장 절차)
 
 ## 진행 중 / 미완료
 

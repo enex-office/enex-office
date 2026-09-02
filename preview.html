@@ -346,6 +346,9 @@ html.js .reveal.on .gitem:nth-child(6){animation-delay:.4s}
 .compare-demo h3{font-size:22px;font-weight:900;letter-spacing:-.02em}
 .compare-demo p{font-size:14.5px;color:var(--ink-soft);margin-top:10px}
 .compare-demo .note{margin-top:14px;font-family:var(--font-mono);font-size:12px;color:var(--brick);font-weight:600}
+.compare-row{display:grid;gap:16px;margin-top:16px}
+@media (min-width:760px){.compare-row{grid-template-columns:1fr 1fr}}
+.compare-row .compare{border-radius:var(--radius);aspect-ratio:16/10}
 
 /* ============================================================
    S9. 제품 하이라이트 — 사진 큼직하게, 등장 애니메이션
@@ -553,7 +556,7 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
           <line class="spoke" pathLength="1" x1="330" y1="285" x2="140" y2="420"/>
         </g>
         <g class="node hq"><circle cx="152" cy="78" r="12"/><circle class="dot" cx="152" cy="78" r="4.5"/>
-          <text class="sub" x="152" y="22">서초 · 영업 · 설계 · 시공관리</text><text x="152" y="48">서울 본사</text></g>
+          <text class="sub" x="152" y="22">HEAD OFFICE</text><text x="152" y="48">서울 본사</text></g>
         <g class="node"><circle cx="212" cy="158" r="9"/>
           <text class="tr" x="234" y="156">안성</text><text class="sub tr" x="234" y="176">물류센터 4,900평</text></g>
         <g class="node"><circle cx="528" cy="72" r="9"/><text class="sub" x="528" y="24">HUB</text><text x="528" y="50">강릉</text></g>
@@ -570,8 +573,6 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
         <div class="big">7<small>물류 거점</small></div>
         <p>국토 중심 황간 공장과 전국 6개 물류센터가 <b>동시에</b> 움직입니다.
           거쳐 가는 단계가 아니라, 현장에서 <b>가장 가까운 센터</b>가 바로 출고합니다.</p>
-        <p class="hq-note"><b>수도권</b>은 서울 본사(서초)가 영업·설계·현장 관리를 맡고,
-          <b>안성 4,900평 물류센터</b>가 출고를 담당합니다.</p>
         <ul class="hublist"><li class="hq">서울 본사</li><li class="main">황간 공장</li><li>안성</li><li>대전</li><li>대구</li><li>부산</li><li>광주</li><li>강릉</li></ul>
       </div>
     </div>
@@ -680,22 +681,38 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
     <div class="gallery-empty" id="galleryEmpty">해당 카테고리의 사례가 준비 중입니다.</div>
     <a class="more-link" href="https://www.enex.co.kr/office/list.php" target="_blank" rel="noopener">세부 납품 사례 (ENEX-OFFICE 홈페이지 이동)</a>
 
-    <!-- [시안 전용 데모] 비포/애프터 비교 슬라이더. 실제 비포 사진이 준비되면 이 블록은 지우고
-         시트 cases 탭에 `비포사진` 열을 추가해 파일명을 넣으면 해당 사례 카드에 같은 슬라이더가 자동 적용됨 -->
+    <!-- 스케치 → 완공 비교 슬라이더. 왼쪽 스케치는 완공 사진에서 선만 추출해 만든 이미지(가짜 '시공 전' 사진 아님).
+         실제 시공 전 사진이 확보되면 시트 cases 탭 `비포사진` 열에 파일명을 넣어 사례 카드에 BEFORE/AFTER 슬라이더로 자동 적용 -->
     <div class="compare-demo">
       <div>
-        <div class="eyebrow">BEFORE / AFTER</div>
-        <h3>바꾸기 전과 후를 손으로 밀어 비교합니다.</h3>
-        <p>AI 영상 없이도 "옛 사무실 → 새 가구"의 변화를 보여주는 가장 가벼운 방법입니다.
-          시공 전 현장 사진 한 장만 있으면 사례 카드마다 적용됩니다.</p>
-        <div class="note">※ 아래 두 장은 동작 확인용 샘플 이미지입니다 (실제 비포 사진 아님)</div>
+        <div class="eyebrow">SKETCH → COMPLETED</div>
+        <h3>구상에서 완공까지,<br>손으로 밀어 확인하세요.</h3>
+        <p>공간 구상 스케치가 실제 시공 결과로 바뀌는 과정을 한 장에서 비교합니다.
+          가구 배치·마감·조명이 계획대로 구현됐는지 그대로 보입니다.</p>
+        <div class="note">※ 왼쪽 스케치는 완공 사진을 바탕으로 제작한 이미지입니다</div>
       </div>
       <div class="compare" id="compareDemo" style="--pos:50%">
-        <img class="after" src="images/case_office_w.jpg" alt="시공 후" loading="lazy">
-        <img class="before" src="images/case_office_v.jpg" alt="시공 전" loading="lazy">
+        <img class="after" src="images/ba_meeting_after.jpg" alt="회의실 완공" loading="lazy">
+        <img class="before" src="images/ba_meeting_concept.jpg" alt="회의실 구상 스케치" loading="lazy">
         <div class="handle"></div>
-        <span class="tag tag-b">BEFORE</span><span class="tag tag-a">AFTER</span>
-        <input type="range" min="0" max="100" value="50" aria-label="시공 전후 비교">
+        <span class="tag tag-b">SKETCH</span><span class="tag tag-a">COMPLETED</span>
+        <input type="range" min="0" max="100" value="50" aria-label="스케치와 완공 비교">
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare" style="--pos:50%">
+        <img class="after" src="images/ba_office_after.jpg" alt="업무공간 완공" loading="lazy">
+        <img class="before" src="images/ba_office_concept.jpg" alt="업무공간 구상 스케치" loading="lazy">
+        <div class="handle"></div>
+        <span class="tag tag-b">SKETCH</span><span class="tag tag-a">COMPLETED</span>
+        <input type="range" min="0" max="100" value="50" aria-label="스케치와 완공 비교">
+      </div>
+      <div class="compare" style="--pos:50%">
+        <img class="after" src="images/ba_lounge_after.jpg" alt="라운지 완공" loading="lazy">
+        <img class="before" src="images/ba_lounge_concept.jpg" alt="라운지 구상 스케치" loading="lazy">
+        <div class="handle"></div>
+        <span class="tag tag-b">SKETCH</span><span class="tag tag-a">COMPLETED</span>
+        <input type="range" min="0" max="100" value="50" aria-label="스케치와 완공 비교">
       </div>
     </div>
   </div>
@@ -834,8 +851,8 @@ const FALLBACK = {
     { 제목:"임원실 · 업무공간", 카테고리:"오피스", 한줄설명:"사무가구 납품", 사진파일명:"case_office_v.jpg", 표시순서:"5", 노출:"Y" },
     /* ⚠️ 2026-09-02 확인: images/ 폴더의 실제 사진 내용과 파일명이 어긋나 있음 (case_dorm=스터디부스, case_comm_booth=피트니스,
        case_comm_gym=스크린골프, case_cafeteria=강의대 제품사진). 아래는 사진 '내용' 기준으로 맞춘 임시 매핑 — 시트의 사진파일명이 항상 우선함 */
-    { 제목:"대학 행복기숙사", 카테고리:"학교 · 기숙사", 한줄설명:"기숙사 가구 납품 · 설치", 사진파일명:"", 표시순서:"6", 노출:"Y" },
-    { 제목:"기숙사 카페테리아", 카테고리:"학교 · 기숙사", 한줄설명:"공용공간 가구 제안 · 시공", 사진파일명:"", 표시순서:"7", 노출:"Y" },
+    { 제목:"대학 행복기숙사", 카테고리:"학교 · 기숙사", 한줄설명:"기숙사 가구 납품 · 설치", 사진파일명:"", 표시순서:"6", 노출:"N" },   // 사진 확보 시 Y
+    { 제목:"기숙사 카페테리아", 카테고리:"학교 · 기숙사", 한줄설명:"공용공간 가구 제안 · 시공", 사진파일명:"", 표시순서:"7", 노출:"N" },   // 사진 확보 시 Y
     { 제목:"아파트 커뮤니티 피트니스", 카테고리:"커뮤니티", 한줄설명:"인테리어 연계 가구 납품", 사진파일명:"case_comm_booth.jpg", 표시순서:"8", 노출:"Y" },
     { 제목:"커뮤니티 스터디 부스", 카테고리:"커뮤니티", 한줄설명:"부스석 제작 · 시공", 사진파일명:"case_dorm.jpg", 표시순서:"9", 노출:"Y" },
     { 제목:"커뮤니티 스크린골프 라운지", 카테고리:"커뮤니티", 한줄설명:"설계 · 시공", 사진파일명:"case_comm_golf.jpg", 추가사진:"case_comm_gym.jpg", 표시순서:"10", 노출:"Y" },
@@ -1076,7 +1093,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
     io.unobserve(e.target);}
 }),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
-initCompare(document.getElementById("compareDemo"));
+document.querySelectorAll(".compare-demo .compare,.compare-row .compare").forEach(initCompare);
 
 const _cb=document.getElementById("callBar"),
       _bar=document.getElementById("progress"), _px=document.getElementById("parallaxImg");
