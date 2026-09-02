@@ -40,7 +40,17 @@
     다크 밴드(#infra·#records), 사업영역 사진 타일, 프로세스 타임라인, 물류 거점 라인, 인증 원형 게이지, 비포/애프터 슬라이더(시트 cases `비포사진` 열, 선택), 상단 진행바, PC 고정 내비
   - 미리보기 Artifact(클로드 코드 채팅에서 전달) — 시트 fetch가 막혀 FALLBACK으로 표시됨. 이미지는 1280px로 축소 임베드된 버전
 - 점검 완료: `node --check` 통과, 380/1920 가로 스크롤 없음, 콘솔 에러는 시트 fetch 차단(샌드박스)만
-- **다음 세션 할 일**: 사장님/담당자 결정(문서 §9 6개 항목) 받기 → `preview.html` 반영 → `index.html` 교체 → CLAUDE.md 갱신 → main push
+- **같은 날 2차 피드백 반영 (v3)**:
+  - 커버 사진 슬라이드쇼 → "아주 좋다" 확정. PC 고정 내비는 스크롤 중 사진을 가려 제거. 갤러리 첫 카드 2칸 확대도 제거
+  - #business 사진 타일: 글자가 사진 위에 겹쳐 안 읽힘 → 사진(위)+어두운 글 판(아래) 분리 구조로 변경
+  - #infra 거점 표현: 가로 타임라인은 "단계를 거친다"는 인상 → 황간 공장 중심 **방사형 거점 지도(SVG)** + "7거점 · 동시 출고" 문구로 교체
+- **⚠️ 발견한 데이터 문제 (index.html에도 그대로 존재, 실사이트는 시트가 정상 로딩되면 영향 없음)**:
+  - `FALLBACK.cases`의 사진파일명이 실제 `images/` 파일 내용과 어긋남 — 2026-07-06 images 폴더를 통째로 지우고 재업로드하면서 이름이 섞인 듯.
+    실제 내용: case_dorm=스터디부스, case_comm_booth=피트니스, case_comm_gym=스크린골프룸, case_cafeteria=강의대 제품사진(사례 아님). 기숙사·카페테리아 사진은 없음.
+    preview.html의 FALLBACK은 사진 내용 기준으로 임시 재매핑(기숙사·카페테리아는 "PHOTO 준비중"). **시트 `cases` 탭의 사진파일명이 실제 사진과 맞는지 사장님 확인 필요.**
+  - `FALLBACK.contacts`에 조인진 차장 없음(이종민·김지민만). 시트에는 있을 것으로 추정 — 이 환경은 docs.google.com 접근이 차단되어(curl·WebFetch 모두 EGRESS_BLOCKED) 시트를 직접 읽을 수 없었음.
+  - 이 두 FALLBACK은 시트 로딩 실패 시 노출되는 안전망이므로, 시트 현재값을 받아 index.html·preview.html 양쪽 FALLBACK을 동기화해야 함 (CLAUDE.md 원칙)
+- **다음 세션 할 일**: (1) 시트 `contacts`·`cases` 탭 현재 행을 사용자에게 받아 FALLBACK 동기화 (2) 문서 §9 나머지 결정 받기 → `preview.html` 반영 → `index.html` 교체 → CLAUDE.md 갱신 → main push
 - 주의: `preview.html`은 시안이므로 main에 올리면 `/preview.html` 주소로 공개됨. 교체 전까지는 브랜치에만 둘 것
 
 ## 진행 중 / 미완료
