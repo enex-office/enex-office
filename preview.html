@@ -942,10 +942,21 @@ function renderGallery(cat){
   g.querySelectorAll(".compare").forEach(initCompare);
 }
 
-/* ---------- 3D 설계 → 시공완료 비교 슬라이더: cases 탭 '설계3D' 열이 채워진 사례만 렌더링 ---------- */
+/* ---------- 3D 설계 → 시공완료 비교 슬라이더 ----------
+   시트 cases 탭 '설계3D' 열이 채워진 사례를 렌더링한다.
+   시트에 아직 '설계3D' 열이 없으면(= 채워진 사례 0건) 아래 기본 세트를 대신 쓴다.
+   FALLBACK과 같은 성격의 안전망 — 시트에 한 건이라도 채워지면 시트 값이 전부 우선한다.
+   ⚠️ 세트를 늘릴 땐 여기 말고 시트에 추가할 것 (docs/홈페이지_운영매뉴얼.md §3) */
+const S3D_SEED=[
+  { 제목:"기업 사옥 라운지 · 팬트리", 한줄설명:"3D 설계안대로 시공 완료",
+    사진파일명:"case_pantry_after.jpg", 설계3D:"case_pantry_3d.jpg", 표시순서:"1" },
+  { 제목:"서가형 스터디 라운지", 한줄설명:"설계 3D 제안 · 시공 완료",
+    사진파일명:"case_study_after.jpg", 설계3D:"case_study_3d.jpg", 표시순서:"2" }
+];
 function render3D(){
   const wrap=document.getElementById("s3dWrap"), grid=document.getElementById("s3dGrid");
-  const list=CASES.filter(c=>(c.설계3D||"").trim()).sort(byOrder);
+  let list=CASES.filter(c=>(c.설계3D||"").trim()).sort(byOrder);
+  if(!list.length) list=S3D_SEED.slice().sort(byOrder);
   if(!list.length){ wrap.style.display="none"; grid.style.display="none"; grid.innerHTML=""; return; }
   wrap.style.display=""; grid.style.display="";
   grid.innerHTML=list.map(c=>{
