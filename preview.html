@@ -349,6 +349,8 @@ html.js .reveal.on .gitem:nth-child(6){animation-delay:.4s}
 .compare-row{display:grid;gap:16px;margin-top:16px}
 @media (min-width:760px){.compare-row{grid-template-columns:1fr 1fr}}
 .compare-row .compare{border-radius:var(--radius);aspect-ratio:16/10}
+.s3d-cap{margin-top:10px;font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft)}
+.s3d-cap b{color:var(--brick);font-weight:600}
 
 /* ============================================================
    S9. 제품 하이라이트 — 사진 큼직하게, 등장 애니메이션
@@ -681,40 +683,17 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
     <div class="gallery-empty" id="galleryEmpty">해당 카테고리의 사례가 준비 중입니다.</div>
     <a class="more-link" href="https://www.enex.co.kr/office/list.php" target="_blank" rel="noopener">세부 납품 사례 (ENEX-OFFICE 홈페이지 이동)</a>
 
-    <!-- 스케치 → 완공 비교 슬라이더. 왼쪽 스케치는 완공 사진에서 선만 추출해 만든 이미지(가짜 '시공 전' 사진 아님).
-         실제 시공 전 사진이 확보되면 시트 cases 탭 `비포사진` 열에 파일명을 넣어 사례 카드에 BEFORE/AFTER 슬라이더로 자동 적용 -->
-    <div class="compare-demo">
+    <!-- 3D 설계 → 시공완료 비교 슬라이더. cases 탭 `설계3D` 열(3D 렌더링 파일명)이 채워진 사례만
+         render3D()가 자동으로 슬라이더로 만든다. 값이 없는 사례는 그대로 위 갤러리 카드로만 노출.
+         `설계3D`가 채워진 사례가 하나도 없으면 아래 래퍼 전체(s3dWrap+s3dGrid)를 JS에서 숨김 -->
+    <div class="compare-demo" id="s3dWrap" style="display:none">
       <div>
-        <div class="eyebrow">SKETCH → COMPLETED</div>
-        <h3>구상에서 완공까지,<br>손으로 밀어 확인하세요.</h3>
-        <p>공간 구상 스케치가 실제 시공 결과로 바뀌는 과정을 한 장에서 비교합니다.
-          가구 배치·마감·조명이 계획대로 구현됐는지 그대로 보입니다.</p>
-        <div class="note">※ 왼쪽 스케치는 완공 사진을 바탕으로 제작한 이미지입니다</div>
-      </div>
-      <div class="compare" id="compareDemo" style="--pos:50%">
-        <img class="after" src="images/ba_meeting_after.jpg" alt="회의실 완공" loading="lazy">
-        <img class="before" src="images/ba_meeting_concept.jpg" alt="회의실 구상 스케치" loading="lazy">
-        <div class="handle"></div>
-        <span class="tag tag-b">SKETCH</span><span class="tag tag-a">COMPLETED</span>
-        <input type="range" min="0" max="100" value="50" aria-label="스케치와 완공 비교">
+        <div class="eyebrow">3D DESIGN → BUILT</div>
+        <h3>설계 3D 제안이,<br>그대로 시공됩니다.</h3>
+        <p>설계 단계 3D 제안이 실제 시공으로 이어진 결과입니다. 손으로 밀어 비교해 보세요.</p>
       </div>
     </div>
-    <div class="compare-row">
-      <div class="compare" style="--pos:50%">
-        <img class="after" src="images/ba_office_after.jpg" alt="업무공간 완공" loading="lazy">
-        <img class="before" src="images/ba_office_concept.jpg" alt="업무공간 구상 스케치" loading="lazy">
-        <div class="handle"></div>
-        <span class="tag tag-b">SKETCH</span><span class="tag tag-a">COMPLETED</span>
-        <input type="range" min="0" max="100" value="50" aria-label="스케치와 완공 비교">
-      </div>
-      <div class="compare" style="--pos:50%">
-        <img class="after" src="images/ba_lounge_after.jpg" alt="라운지 완공" loading="lazy">
-        <img class="before" src="images/ba_lounge_concept.jpg" alt="라운지 구상 스케치" loading="lazy">
-        <div class="handle"></div>
-        <span class="tag tag-b">SKETCH</span><span class="tag tag-a">COMPLETED</span>
-        <input type="range" min="0" max="100" value="50" aria-label="스케치와 완공 비교">
-      </div>
-    </div>
+    <div class="compare-row" id="s3dGrid" style="display:none"></div>
   </div>
 </section>
 
@@ -853,7 +832,8 @@ const FALLBACK = {
     { 제목:"대학 행복기숙사", 카테고리:"학교 · 기숙사", 한줄설명:"기숙사 가구 납품 · 설치", 사진파일명:"case_dorm.jpg", 표시순서:"6", 노출:"Y" },
     { 제목:"아파트 커뮤니티 피트니스", 카테고리:"커뮤니티", 한줄설명:"운동용품 및 이동가구 납품", 사진파일명:"case_comm_booth.jpg", 표시순서:"7", 노출:"Y" },
     { 제목:"커뮤니티 스크린골프 라운지", 카테고리:"커뮤니티", 한줄설명:"설계 · 시공", 사진파일명:"case_comm_golf.jpg", 표시순서:"8", 노출:"Y" },
-    { 제목:"레지던스 주방 · 수납", 카테고리:"레지던스", 한줄설명:"인테리어 포함 가구 설계", 사진파일명:"case_resi_living.jpg", 표시순서:"9", 노출:"Y" }
+    { 제목:"레지던스 주방 · 수납", 카테고리:"레지던스", 한줄설명:"인테리어 포함 가구 설계", 사진파일명:"case_resi_living.jpg", 표시순서:"9", 노출:"Y" },
+    { 제목:"기업 사옥 라운지 · 팬트리", 카테고리:"오피스", 한줄설명:"3D 설계안대로 시공 완료", 사진파일명:"case_pantry_after.jpg", 표시순서:"10", 노출:"Y", 설계3D:"case_pantry_3d.jpg" }
   ],
   links: [
     { 항목:"전화 대표", URL:"tel:02-2185-2263" },
@@ -960,6 +940,37 @@ function renderGallery(cat){
     openLB(+el.dataset.idx);
   }));
   g.querySelectorAll(".compare").forEach(initCompare);
+}
+
+/* ---------- 3D 설계 → 시공완료 비교 슬라이더: cases 탭 '설계3D' 열이 채워진 사례만 렌더링 ---------- */
+function render3D(){
+  const wrap=document.getElementById("s3dWrap"), grid=document.getElementById("s3dGrid");
+  const list=CASES.filter(c=>(c.설계3D||"").trim()).sort(byOrder);
+  if(!list.length){ wrap.style.display="none"; grid.style.display="none"; grid.innerHTML=""; return; }
+  wrap.style.display=""; grid.style.display="";
+  grid.innerHTML=list.map(c=>{
+    const before=toSrc((c.설계3D||"").trim()), after=toSrc((c.사진파일명||"").trim());
+    const title=esc(c.제목||""), desc=esc(c.한줄설명||"");
+    const cap=desc? `<b>${title}</b> · ${desc}` : `<b>${title}</b>`;
+    const span=list.length===1? ' style="grid-column:1/-1"' : "";
+    return `<div class="s3d-item"${span}>
+      <div class="compare" style="--pos:50%">
+        <img class="after" src="${escAttr(after)}" alt="${escAttr(c.제목||"")} 실제 시공" loading="lazy" onerror="s3dImgFail(this)">
+        <img class="before" src="${escAttr(before)}" alt="${escAttr(c.제목||"")} 3D 설계안" loading="lazy" onerror="s3dImgFail(this)">
+        <div class="handle"></div>
+        <span class="tag tag-b">3D 설계안</span><span class="tag tag-a">실제 시공</span>
+        <input type="range" min="0" max="100" value="50" aria-label="3D 설계안과 실제 시공 비교">
+      </div>
+      <div class="s3d-cap">${cap}</div>
+    </div>`;
+  }).join("");
+  grid.querySelectorAll(".compare").forEach(initCompare);
+}
+function s3dImgFail(img){   // 시트에 적힌 파일이 images/에 없을 때 깨진 아이콘 대신 카드 자체를 숨김
+  const item=img.closest(".s3d-item");
+  if(item) item.remove();
+  const grid=document.getElementById("s3dGrid");
+  if(grid && !grid.children.length) document.getElementById("s3dWrap").style.display="none";
 }
 
 /* ---------- 비포/애프터 비교 슬라이더 ---------- */
@@ -1091,7 +1102,6 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
     io.unobserve(e.target);}
 }),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
-document.querySelectorAll(".compare-demo .compare,.compare-row .compare").forEach(initCompare);
 
 const _cb=document.getElementById("callBar"),
       _bar=document.getElementById("progress"), _px=document.getElementById("parallaxImg");
@@ -1119,7 +1129,7 @@ onScroll();
   renderCopy(copy);
   renderRecords(records);
   CASES=cases.filter(c=>(c.노출||"Y").toUpperCase()!=="N");
-  renderFilters(); renderGallery("전체");
+  renderFilters(); renderGallery("전체"); render3D();
   renderContacts(contacts); renderLinks(links);
 })();
 </script>
