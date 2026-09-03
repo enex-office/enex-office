@@ -393,7 +393,7 @@ html.js .reveal.on .prod:nth-child(2){animation-delay:.1s}html.js .reveal.on .pr
 .contact .eyebrow{color:var(--brick-soft)}
 .contact .lede{color:var(--paper-soft)}
 .contact-grid{display:grid;gap:16px;margin-top:56px}
-@media (min-width:860px){.contact-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:860px){.contact-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}}
 .person{background:var(--ink-2);border-radius:var(--radius);padding:28px 26px}
 .person .role{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;color:var(--paper-soft);font-weight:600}
 .person h3{font-size:24px;font-weight:800;margin-top:6px}
@@ -823,8 +823,9 @@ const HERO_VIDEO = "";
 const FALLBACK = {
   copy: [],
   contacts: [
-    { 이름:"이종민", 직급:"대리", 내선번호:"02-0000-0000 ⚠️확인", 휴대폰:"010-2229-9673", 표시순서:"1" },
-    { 이름:"김지민", 직급:"대리", 내선번호:"02-0000-0000 ⚠️확인", 휴대폰:"010-8358-2472", 표시순서:"2" }
+    { 이름:"이종민", 직급:"대리", 내선번호:"02-2185-2121", 휴대폰:"010-2229-9673", 표시순서:"1", 역할:"현장·시공 문의" },
+    { 이름:"김지민", 직급:"대리", 내선번호:"02-2185-2263", 휴대폰:"010-8358-2472", 표시순서:"2", 역할:"디자인·제안 문의" },
+    { 이름:"조인진", 직급:"차장", 내선번호:"02-2185-2095", 휴대폰:"010-3529-0389", 표시순서:"3", 역할:"입찰·견적금액 문의" }
   ],
   records: [
     { 카테고리:"금융 · 공공", 표기명:"H은행 본점", 표시순서:"1" },
@@ -849,19 +850,16 @@ const FALLBACK = {
     { 제목:"제조기업 W사 신사옥", 카테고리:"오피스", 한줄설명:"업무공간 · 라운지 설계 시공", 사진파일명:"case_office_w.jpg", 표시순서:"3", 노출:"Y" },
     { 제목:"기업 사옥 라운지", 카테고리:"오피스", 한줄설명:"라운지 가구 제안 · 납품", 사진파일명:"case_office_lounge2.jpg", 표시순서:"4", 노출:"Y" },
     { 제목:"임원실 · 업무공간", 카테고리:"오피스", 한줄설명:"사무가구 납품", 사진파일명:"case_office_v.jpg", 표시순서:"5", 노출:"Y" },
-    /* ⚠️ 2026-09-02 확인: images/ 폴더의 실제 사진 내용과 파일명이 어긋나 있음 (case_dorm=스터디부스, case_comm_booth=피트니스,
-       case_comm_gym=스크린골프, case_cafeteria=강의대 제품사진). 아래는 사진 '내용' 기준으로 맞춘 임시 매핑 — 시트의 사진파일명이 항상 우선함 */
-    { 제목:"대학 행복기숙사", 카테고리:"학교 · 기숙사", 한줄설명:"기숙사 가구 납품 · 설치", 사진파일명:"", 표시순서:"6", 노출:"N" },   // 사진 확보 시 Y
-    { 제목:"기숙사 카페테리아", 카테고리:"학교 · 기숙사", 한줄설명:"공용공간 가구 제안 · 시공", 사진파일명:"", 표시순서:"7", 노출:"N" },   // 사진 확보 시 Y
-    { 제목:"아파트 커뮤니티 피트니스", 카테고리:"커뮤니티", 한줄설명:"인테리어 연계 가구 납품", 사진파일명:"case_comm_booth.jpg", 표시순서:"8", 노출:"Y" },
-    { 제목:"커뮤니티 스터디 부스", 카테고리:"커뮤니티", 한줄설명:"부스석 제작 · 시공", 사진파일명:"case_dorm.jpg", 표시순서:"9", 노출:"Y" },
-    { 제목:"커뮤니티 스크린골프 라운지", 카테고리:"커뮤니티", 한줄설명:"설계 · 시공", 사진파일명:"case_comm_golf.jpg", 추가사진:"case_comm_gym.jpg", 표시순서:"10", 노출:"Y" },
-    { 제목:"레지던스 주방 · 수납", 카테고리:"레지던스", 한줄설명:"인테리어 포함 가구 설계", 사진파일명:"case_resi_living.jpg", 표시순서:"11", 노출:"Y" }
+    { 제목:"대학 행복기숙사", 카테고리:"학교 · 기숙사", 한줄설명:"기숙사 가구 납품 · 설치", 사진파일명:"case_dorm.jpg", 표시순서:"6", 노출:"Y" },
+    { 제목:"아파트 커뮤니티 피트니스", 카테고리:"커뮤니티", 한줄설명:"운동용품 및 이동가구 납품", 사진파일명:"case_comm_booth.jpg", 표시순서:"7", 노출:"Y" },
+    { 제목:"커뮤니티 스크린골프 라운지", 카테고리:"커뮤니티", 한줄설명:"설계 · 시공", 사진파일명:"case_comm_golf.jpg", 표시순서:"8", 노출:"Y" },
+    { 제목:"레지던스 주방 · 수납", 카테고리:"레지던스", 한줄설명:"인테리어 포함 가구 설계", 사진파일명:"case_resi_living.jpg", 표시순서:"9", 노출:"Y" }
   ],
   links: [
     { 항목:"전화 대표", URL:"tel:02-2185-2263" },
     { 항목:"견적 의뢰 폼", URL:"https://forms.gle/bKg4tZ7b445CT34h9" },
-    { 항목:"A/S 접수 폼", URL:"https://forms.gle/Ebnq92fGxCfBeBAu7" }
+    { 항목:"A/S 접수 폼", URL:"https://forms.gle/Ebnq92fGxCfBeBAu7" },
+    { 항목:"카탈로그", URL:"https://docs.google.com/forms/d/e/1FAIpQLSfOCowH5eGYt_f_9UzvSd6oRVIdMwS9P9jjQL45wDSEKHuTgA/viewform?usp=publish-editor" }
   ]
 };
 
