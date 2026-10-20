@@ -43,6 +43,13 @@ a{color:inherit;text-decoration:none}
 button{font-family:var(--font-body)}
 :focus-visible{outline:3px solid var(--brick);outline-offset:3px;border-radius:4px}
 
+
+/* ---- 홍보영상 (첫 화면 바로 아래) ---- */
+#film{padding:56px 24px;background:var(--ink)}
+#film .film-box{max-width:var(--maxw);margin:0 auto;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+#film video{width:100%;height:100%;display:block;object-fit:cover}
+@media (max-width:640px){#film{padding:32px 16px}#film .film-box{border-radius:12px}}
+
 /* ---- 공통 섹션 골격 ---- */
 section{padding:96px 24px;position:relative}
 .wrap{max-width:var(--maxw);margin:0 auto}
@@ -553,6 +560,13 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
     </div>
   </div>
 </header>
+
+<!-- ================= 홍보영상 (video/hero.mp4 — 교체하려면 같은 이름으로 덮어쓰기) ================= -->
+<section id="film" aria-label="에넥스 오피스 홍보영상">
+  <div class="film-box">
+    <video id="filmVideo" muted loop playsinline controls preload="none" poster="images/film_poster.jpg" src="video/hero.mp4"></video>
+  </div>
+</section>
 
 <!-- ================= S2. 회사 소개 ================= -->
 <section id="about">
@@ -1190,6 +1204,14 @@ function renderLinks(data){
   mountHeroVideo(find("커버영상")||HERO_VIDEO);
 }
 
+/* ---------- 홍보영상: 화면에 들어오면 무음 자동재생, 벗어나면 정지 (동작 줄이기·데이터 절약이면 사용자가 직접 재생) ---------- */
+(function filmVideo(){
+  const v=document.getElementById("filmVideo"); if(!v) return;
+  if(REDUCED||SAVE_DATA||!("IntersectionObserver" in window)) return;
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){ v.preload="auto"; v.play().catch(()=>{}); } else v.pause();
+  }),{threshold:.5}).observe(v);
+})();
 /* ---------- 커버: 영상 슬롯 + 사진 슬라이드쇼 ---------- */
 function mountHeroVideo(url){
   if(!url||REDUCED||SAVE_DATA) return;               // 동작 줄이기·데이터 절약 모드면 사진만
