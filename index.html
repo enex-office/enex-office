@@ -50,6 +50,11 @@ button{font-family:var(--font-body)}
 #film video{width:100%;height:100%;display:block;object-fit:cover}
 @media (max-width:640px){#film{padding:32px 16px}#film .film-box{border-radius:12px}}
 
+
+/* ---- 줄바꿈 다듬기: 문장 끝에 한 단어만 내려오는 것 방지 (폰 폭) ---- */
+p,li,dd,figcaption,.lede,.a{text-wrap:balance}
+h3,h4{text-wrap:balance}
+
 /* ---- 공통 섹션 골격 ---- */
 section{padding:96px 24px;position:relative}
 .wrap{max-width:var(--maxw);margin:0 auto}
@@ -801,7 +806,7 @@ footer{background:#181210;color:#8B7F77;padding:26px 24px;font-size:12.5px;text-
       <div class="badge"><div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46" pathLength="1"/><circle class="fg" cx="50" cy="50" r="46" pathLength="1"/></svg><div class="code">ISO<br>9001</div></div><h3>품질경영시스템</h3><p>1996년 취득 · 한국표준협회</p></div>
       <div class="badge"><div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46" pathLength="1"/><circle class="fg" cx="50" cy="50" r="46" pathLength="1"/></svg><div class="code">ISO<br>14001</div></div><h3>환경경영시스템</h3><p>2015년 취득 · 한국표준협회</p></div>
       <div class="badge"><div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46" pathLength="1"/><circle class="fg" cx="50" cy="50" r="46" pathLength="1"/></svg><div class="code">ISO<br>45001</div></div><h3>안전보건경영시스템</h3><p>2024년 취득 · 한국표준협회</p></div>
-      <div class="badge"><div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46" pathLength="1"/><circle class="fg" cx="50" cy="50" r="46" pathLength="1"/></svg><div class="code">실내건축<br>공사업</div></div><h3>건설업등록</h3><p>등록번호 서초-07-01-14</p></div>
+      <div class="badge"><div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46" pathLength="1"/><circle class="fg" cx="50" cy="50" r="46" pathLength="1"/></svg><div class="code">실내건축<br>공사업</div></div><h3>건설업등록</h3><p>등록번호 <span style="white-space:nowrap">서초-07-01-14</span></p></div>
       <div class="badge"><div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46" pathLength="1"/><circle class="fg" cx="50" cy="50" r="46" pathLength="1"/></svg><div class="code">A/S<br>우수기업</div></div><h3>사후관리 인증</h3><p>산업자원부 · 전담 A/S 조직 운영</p></div>
     </div>
   </div>
